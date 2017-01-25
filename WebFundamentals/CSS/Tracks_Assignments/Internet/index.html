@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>CSS - Internet Assignment</title>
+  <link rel="stylesheet" href="normalize.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="wrapper">
+    <div id="header">
+      <img src="images/globe.png" id="logo" />
+      <h1 id="logo_text">The Inter<span class="blue">net</span></h1>
+      <h2 id="header_text">The World Wide Web</h2>
+    </div>
+    <div id="sidebar">
+      <div id="sidebar_top">
+        <h3>So, what's an <span class="red">Internet?</span></h3>
+        <p id="sidebar_text">An<span class="blue">inter</span>connected<span class="blue">Net</span>work
+        of computers all around the world!</p>
+        <button id="blue_button" class="sidebar_button">WATCH A VIDEO</button>
+        <button id="orange_button" class="sidebar_button">MORE RESOURCES</button>
+      </div>
+      <hr />
+      <div id="sidebar_bottom">
+        <img src="images/ad_background.png" alt="background" id="ad_background" />
+        <p id="ad_text">Reinvent your career in just 14 weeks</p>
+        <img src="images/ninja.png" alt="ninja" id="ninja">
+        <button id="ad_button">Learn More >>></button>
+      </div>
+    </div>
+    <div id="main_content">
+      <!-- TODO: Finish Main content -->
+      <div id="subheader">
+        <img id="home" src="images/home.png" alt="home" height="20" width="20">
+        <p class="header">DNS</p>
+        <div id="subheader_logo">
+          <img id="phone" src="images/phone.png" alt="phone" height="50" width="50">
+          <div id="subheader_logo_text">
+            <p>Mon - Fri 9 a.m. - 5 p.m. (EST)</p>
+            <h2 id="phone_number">855.967.3787</h2>
+            <p>International +1.617.963.0555</p>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="article">
+        <h3 class="article_header">Clients and Servers</h3>
+        <p>Computers connected to the <span class="light_blue">Web</span> are
+        called <strong>clients</strong> and <strong>servers</strong>.</p>
+        <ul>
+          <li><span class="light_blue">Clients</span> are the typical Web user's
+          Internet-connected devices (for example, your computer connected to
+          your Wi-Fi, or your phone connected to your mobile network) and
+          <span class="light_blue">Web-accessing software</span>available on
+          those devices (usually a web browser like Firefox or Chrome).</li>
+          <li><span class="light_blue">Servers</span> are computers that store
+          <span class="light_blue">webpages</span>,<span class="light_blue">
+          sites</span>, or <span class="light_blue">apps</span>. When a client
+          device wants to access a webpage, a copy of the webpage is downloaded
+          from the server onto the client machine to be displayed in the user's
+          web browser.</li>
+        </ul>
+        <img id="client_server" src="images/client_server.jpg" alt="client_server" width="250" />
+      </div>
+      <div class="article">
+        <h3 class="article_header">So What Actually Happens?</h3>
+        <ol>
+          <li>The browser goes to the <span class="light_blue">DNS server</span>
+          and finds the real address of the <span class="light_blue">server</span>
+          that the website lives on.</li>
+          <li>The browser sends an <span class="light_blue">HTTP request</span>
+          message to the server asking it to send a copy of the website to the
+          client.</li>
+          <li>If the server approves the client's request, the server sends the
+          client a <span class="light_blue">"200 OK" message</span>, which
+          means "Permission granted! Here you go!", and then starts sending the
+          website's files to the browser as a series of small chunks.</li>
+          <li>The browser assembles the small chinks into a complete website
+          and displays it to you!</li>
+        </ol>
+      </div>
+      <div id="lower_banner">
+        <img id="html" src="images/html.png" alt="html" height="100" />
+        <div id="footer_text">
+          <h3 class="article_header">The Big 3 - HTML, CSS, JavaScript</h3>
+          <p>While the server can process information in many different languages,
+          the files that they server to the client are <i>always</i> going to be
+          some combination of HTML, CSS, and JavaScript!</p>
+          <p>Learn more about the Big 3 <span class="light_blue">here</span>!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
