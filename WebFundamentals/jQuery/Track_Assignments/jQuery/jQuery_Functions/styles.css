@@ -1,0 +1,8 @@
+.hide-show-me, .slide-down-up-me,
+.fade-in-out-me{
+  display: none;
+}
+
+.red{
+  color: red;
+}
