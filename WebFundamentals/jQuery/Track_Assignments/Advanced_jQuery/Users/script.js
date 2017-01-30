@@ -18,8 +18,6 @@ $(document).ready(function () {
         ele.append("<td>" + formObject[key] + "<//td>")
       }
     }
-
-    console.log(formObject);
     return false;
   });
 });
