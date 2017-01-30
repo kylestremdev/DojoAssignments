@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>jQuery - Contact Card Assignment</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+    <style>
+      .contact{
+        border: 1px solid black;
+        display: inline-block;
+        width: 200px;
+        height: 200px;
+        text-align: center;
+        vertical-align: top;
+      }
+    </style>
+  </head>
+  <body>
+    <form>
+      <label>First Name: </label>
+      <input type="text" name="first_name" />
+      <br />
+      <br />
+
+      <label>Last Name: </label>
+      <input type="text" name="last_name" />
+      <br />
+      <br />
+
+      <label>Description:</label>
+      <br />
+      <textarea name="description" rows="8" cols="80" placeholder="Enter Description"></textarea>
+      <br />
+      <br />
+
+      <input type="submit" value="Add Contact" />
+    </form>
+
+    <div id="contact_group">
+
+    </div>
+  </body>
+</html>
