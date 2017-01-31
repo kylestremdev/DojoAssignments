@@ -19,7 +19,6 @@ $(document).ready(function (){
     var house = $(this).attr('alt');
     $.get(encodeURI(url+house), function(data){
       $('div').html(populateContent(data));
-      console.log(data);
     });
   });
 });
