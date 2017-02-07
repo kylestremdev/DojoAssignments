@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Flask - Counter Assignement</title>
+    <style>
+      a{
+        text-decoration: none;
+      }
+
+      a:visited{
+        color: black;
+      }
+
+      #main a:hover{
+        cursor: default;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+       <h2><a href="/ninjas">Counter</a></h2>
+       {% if session['counter'] > 1 %}
+       <p>{{ session['counter'] }} times</p>
+       {% else %}
+       <p>{{ session['counter'] }} time</p>
+       {% endif %}
+    </div>
+    <a href="/hackers">Reset</a>
+  </body>
+</html>
