@@ -1,0 +1,25 @@
+#wrapper {
+  margin: auto;
+  border: 1px solid black;
+  width: 75%;
+}
+
+form{
+  margin: 10px;
+}
+
+form label, form textarea, form input, form select{
+  margin: 5px 20px;
+}
+
+#wrapper h3, #wrapper p, #wrapper a{
+  padding-left: 20px;
+}
+
+#wrapper button{
+  margin-bottom: 20px;
+}
+
+.red {
+  color: red;
+}
