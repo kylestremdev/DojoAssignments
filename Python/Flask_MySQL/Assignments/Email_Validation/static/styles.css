@@ -1,0 +1,50 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+
+h3{
+  text-decoration: underline;
+}
+
+h5{
+  display: block;
+  margin: 10px auto;
+  text-align: center;
+  height: 20px;
+  padding: 30px;
+}
+
+#emails{
+  margin-bottom: 20px; 
+}
+
+.error{
+  color: white;
+  background-color: red
+}
+
+.success{
+  color: white;
+  background-color: green;
+}
+
+#create{
+  border: 1px solid black;
+  width: 50%;
+  margin: 0 auto;
+  text-align: left;
+}
+
+#create label, #create input[name='email'], #delete label, #delete input[name='id']{
+  margin-top: 10px;
+}
+
+#create label, #delete label {
+  margin-left: 20px;
+  margin-right: 190px;
+}
+
+#create input[type='submit'], #delete input[type='submit'] {
+  margin: 20px 10px 10px 355px;
+}

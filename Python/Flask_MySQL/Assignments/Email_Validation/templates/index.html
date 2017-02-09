@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Flask MySQL - Email Validation Assignment</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  </head>
+  <body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <h5 class='{{category}}'>{{message}}</h5>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form id="create" action="/create" method="post">
+      <label for="email">Email Address:</label>
+      <input type="text" name="email" value="">
+      <br />
+      <input type="submit" name="submit" value="Add">
+    </form>
+
+    <div id="emails">
+      {% if emails %}
+      <h3>Emails Entered:</h3>
+        {% for data in emails %}
+          <p>{{ data['email'] }} &emsp; {{ data['created_at'] }}</p>
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    <hr />
+
+    <form id="delete" action="/delete" method="post">
+      <label for="id">Email Id: </label>
+      <input type="text" name="id" value="">
+      <br />
+      <input type="submit" name="submit" value="Delete">
+    </form>
+  </body>
+</html>
