@@ -1,0 +1,29 @@
+.delete, .delete input, p{
+  display: inline;
+}
+
+.create, .edit{
+  margin-top: 20px;
+}
+
+.create label, .create input[type='text'], .edit label, .edit input[type='text']{
+  margin: 5px 10px;
+}
+
+.error {
+  color: red;
+}
+
+.success {
+  color: green;
+}
+
+ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.friend{
+  margin-top: 5px;
+}
