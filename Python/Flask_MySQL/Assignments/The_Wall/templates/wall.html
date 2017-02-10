@@ -6,10 +6,11 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
   </head>
   <body>
-    <div id="post">
+    <div id="message">
       <h4>Post a message</h4>
-      <form class="message" action="/post" method="post">
-        <textarea name="message" rows="8" cols="80"></textarea>
+      <form class="message" action="/message" method="post">
+        <input type="hidden" name="user_id" value="{{session['user_id']}}">
+        <textarea name="message" rows="4" cols="80"></textarea>
         <br />
         <input type="submit" name="submit" value="Post a message">
       </form>
@@ -19,16 +20,45 @@
       <ul id="posts">
       {% for post in posts %}
         <li class="post">
-          {{post['message']}}
-          {% if post['comments'] %}
+          {% for user in users %}
+            {% if user['id'] == posts[post]['user_id'] %}
+              <h3>
+                {{user['first_name']}} {{user['last_name']}} - {{posts[post]['updated_at']}} &emsp;
+                {% if session['user_id'] == posts[post]['user_id'] %}
+                  <a class="delete" href="/delete/message/{{posts[post]['id']}}">Delete</a>
+                {% endif %}
+              </h3>
+            {% endif %}
+          {% endfor %}
+          <p>{{posts[post]['message']}}</p>
+          {% if posts[post]['comments'] %}
           <ul class="comments">
-            {% for comment in post['comments'] %}
-              <li class="comment">{{comment}}</li>
+            {% for comment in posts[post]['comments'] %}
+              <li class="comment">
+                {% for user in users %}
+                  {% if user['id'] == comment['users_id'] %}
+                    <h4>{{user['first_name']}} {{user['last_name']}} - {{comment['updated_at']}}</h4>
+                  {% endif %}
+                {% endfor %}
+                <p>{{comment['comment']}}</p>
+              </li>
             {% endfor %}
           </ul>
           {% endif %}
+          <div id="comment">
+            <h4>Post a Comment</h4>
+            <form class="comment" action="/comment" method="post">
+              <input type="hidden" name="users_id" value="{{session['user_id']}}">
+              <input type="hidden" name="messages_id" value="{{posts[post]['id']}}">
+              <textarea name="comment" rows="2" cols="80"></textarea>
+              <br />
+              <input type="submit" name="submit" value="Post a comment">
+            </form>
+          </div>
         </li>
       {% endfor %}
     {% endif %}
+
+    <a href="/logout">Logout</a>
   </body>
 </html>

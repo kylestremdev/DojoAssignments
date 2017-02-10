@@ -28,15 +28,35 @@ label{
   width: 200px;
 }
 
-#post{
+#message{
   margin-right: 10px;
   padding: 20px;
 }
 
-#post form{
+#message form{
   text-align: right;
 }
 
-#post textarea{
+#message textarea{
   width: 100%;
+}
+
+#comment{
+  margin-right: 10px;
+  padding: 20px;
+}
+
+#comment form{
+  text-align: right;
+}
+
+#comment textarea{
+  width: 100%;
+}
+
+.delete{
+  font-weight: normal;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 12pt;
 }

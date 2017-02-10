@@ -14,6 +14,9 @@ mysql = MySQLConnector(app, 'flaskMySQL_The_Wall')
 
 @app.route('/')
 def index():
+    if 'user_id' in session:
+        return redirect('/wall')
+
     return render_template('index.html')
 
 @app.route('/login', methods=['POST'])
@@ -91,8 +94,6 @@ def register():
 
     user = mysql.query_db("SELECT * FROM users WHERE email = :email AND password = :password", data)
 
-    print user
-
     session['user_id'] = user[0]['id']
 
     return redirect('/wall')
@@ -100,6 +101,13 @@ def register():
 
 @app.route('/wall')
 def wall():
+    if 'user_id' not in session:
+        return redirect('/')
+
+    users_query = """SELECT * FROM users"""
+
+    users = mysql.query_db(users_query)
+
     messages_query = """SELECT * FROM messages"""
 
     messages = mysql.query_db(messages_query)
@@ -110,18 +118,96 @@ def wall():
 
     posts = {}
 
-    for message in messages:
-        posts[message['id']] = {
-            'message': message['message'],
+
+    for index in range(len(messages)-1, -1, -1):
+        posts[len(messages) - 1 - index] = {
+            'id': messages[index]['id'],
+            'user_id': messages[index]['user_id'],
+            'message': messages[index]['message'],
+            'updated_at': messages[index]['updated_at'],
             'comments': []
         }
 
     for comment in comments:
-        posts[comment['messages_id']]['comments'].push(comment['comment'])
+        for post in posts:
+            if posts[post]['id'] == comment['messages_id']:
+                posts[post]['comments'].insert(0, comment)
 
-    return render_template('wall.html', posts=posts)
+    return render_template('wall.html', posts=posts, users=users)
 
-# TODO: Create routes for handling posts and comments
+@app.route('/message', methods=["POST"])
+def post_message():
+    query = """INSERT INTO messages (user_id, message, created_at, updated_at)
+                VALUES (:user_id, :message, NOW(), NOW())"""
+
+    data = {
+        'user_id': request.form['user_id'],
+        'message': request.form['message']
+    }
+
+    if len(data['message']) < 1:
+        flash('Message must not be blank')
+        return redirect('/wall')
+
+    mysql.query_db(query, data)
+
+    return redirect('/wall')
+
+@app.route('/comment', methods=["POST"])
+def post_comment():
+    query = """INSERT INTO comments (messages_id, users_id, comment, created_at, updated_at)
+                VALUES (:messages_id, :users_id, :comment, NOW(), NOW())"""
+
+    data = {
+        'messages_id': request.form['messages_id'],
+        'users_id': request.form['users_id'],
+        'comment': request.form['comment']
+    }
+
+    if len(data['comment']) < 1:
+        flash('Comment must not be blank')
+        return redirect('/wall')
+
+    mysql.query_db(query, data)
+
+    return redirect('/wall')
+
+@app.route('/logout')
+def logout():
+    if 'user_id' in session:
+        session.pop('user_id')
+
+    return redirect('/')
+
+@app.route('/delete/<content>/<the_id>')
+def delete(content, the_id):
+    if content == 'message':
+
+        query = """SELECT * FROM messages WHERE id = :id"""
+        data = { 'id': the_id }
+
+        message = mysql.query_db(query, data)[0]
+
+        if session['user_id'] == message['user_id']:
+            del_query = """DELETE FROM messages WHERE id = :id"""
+
+            mysql.query_db(query, data)
+
+        return redirect('/wall')
+
+    if content == 'comment':
+
+        query = """SELECT * FROM comments WHERE id = :id"""
+        data = { 'id': the_id }
+
+        comment = mysql.query_db(query, data)[0]
+
+        if session['user_id'] == comment['user_id']:
+            del_query = """DELETE FROM comments WHERE id = :id"""
+
+            mysql.query_db(query, data)
+
+        return redirect('/wall')
 
 
 app.run(debug=True)
