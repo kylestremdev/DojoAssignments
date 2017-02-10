@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>The Wall</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  </head>
+  <body>
+    <div id="post">
+      <h4>Post a message</h4>
+      <form class="message" action="/post" method="post">
+        <textarea name="message" rows="8" cols="80"></textarea>
+        <br />
+        <input type="submit" name="submit" value="Post a message">
+      </form>
+    </div>
+
+    {% if posts %}
+      <ul id="posts">
+      {% for post in posts %}
+        <li class="post">
+          {{post['message']}}
+          {% if post['comments'] %}
+          <ul class="comments">
+            {% for comment in post['comments'] %}
+              <li class="comment">{{comment}}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </li>
+      {% endfor %}
+    {% endif %}
+  </body>
+</html>

@@ -1,0 +1,42 @@
+#index{
+  padding: 0;
+}
+
+.error {
+  color: red;
+}
+
+#login, #register {
+  display: inline-block;
+  vertical-align: top;
+}
+
+label, input[type='text'], input[type='password']{
+  margin: 5px;
+}
+
+label{
+  display: inline-block;
+  width: 150px;
+}
+
+#register{
+  margin-left: 20px;
+}
+
+#register label {
+  width: 200px;
+}
+
+#post{
+  margin-right: 10px;
+  padding: 20px;
+}
+
+#post form{
+  text-align: right;
+}
+
+#post textarea{
+  width: 100%;
+}
