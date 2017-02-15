@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Ninja</title>
+    <style>
+      img {
+        height: 500px;
+      }
+    </style>
+  </head>
+  <body>
+    {% load staticfiles %}
+    <img src="{% static 'Ninjas/'|add:link %}" >
+  </body>
+</html>
