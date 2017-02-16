@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Django - Courses Assignment</title>
+    <style>
+      #add_course form{
+        text-align: left;
+      }
+
+      label{
+        display: inline-block;
+        vertical-align: top;
+        width: 100px;
+      }
+
+      label, input[type='text'], textarea{
+        margin: 5px;
+      }
+
+      #courses{
+        text-align: center;
+      }
+
+      table{
+        border-collapse: collapse;
+        width: 80%;
+      }
+
+      thead{
+        background-color: #ddd;
+      }
+
+      th, td{
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="add_course">
+      <h3>Add a new course</h3>
+      <form action="/add_course" method="post">
+        {% csrf_token %}
+        <label for="name">Name:</label>
+        <input type="text" name="name" value="">
+        <br />
+        <label for="description">Description:</label>
+        <textarea name="description" rows="4" cols="80"></textarea>
+        <br />
+        <input type="submit" name="" value="Add">
+      </form>
+    </div>
+
+    <div id="courses">
+      <table>
+        <thead>
+          <tr>
+            <th>Course Name</th>
+            <th>Description</th>
+            <th>Date Added</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for course in courses %}
+          <tr>
+            <td>{{course.course.name}}</td>
+            <td>{{course.content}}</td>
+            <td>{{course.course.created_at}}</td>
+            <td><a href="/courses/destroy/{{course.course.id}}">Remove</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
