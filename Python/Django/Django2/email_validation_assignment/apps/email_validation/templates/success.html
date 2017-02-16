@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Emails</title>
+  </head>
+  <body>
+    <h3>Email Addresses Entered:</h3>
+    <div>
+      {% for email in emails %}
+        <p>{{email.email}} {{email.created_at}}</p>
+      {% endfor %}
+    </div>
+  </body>
+</html>
