@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Django - Login and Register Assignment</title>
+    <style>
+      .error{
+        padding: 0;
+      }
+      .error li{
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    {% if messages %}
+      <ul class="error">
+        {% for message in messages %}
+        <li>{{message}}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    <div id="register">
+      <h3>Registration</h3>
+      <form action="/register" method="post">
+        {% csrf_token %}
+        <label for="first_name">First Name:</label>
+        <input type="text" name="first_name" value="">
+        <br />
+        <label for="last_name">Last Name:</label>
+        <input type="text" name="last_name" value="">
+        <br />
+        <label for="email">Email:</label>
+        <input type="text" name="email" value="">
+        <br />
+        <label for="password">Password:</label>
+        <input type="password" name="password" value="">
+        <br />
+        <label for="password_confirmation">Confirm Password:</label>
+        <input type="text" name="password_confirmation" value="">
+        <br />
+        <input type="submit" name="" value="Register">
+      </form>
+    </div>
+
+    <div id="login">
+      <h3>Login</h3>
+      <form action="/login" method="post">
+        {% csrf_token %}
+        <label for="email">Email:</label>
+        <input type="text" name="email" value="">
+        <br />
+        <label for="password">Password</label>
+        <input type="text" name="password" value="">
+        <br />
+        <input type="submit" name="" value="Login">
+      </form>
+    </div>
+  </body>
+</html>
