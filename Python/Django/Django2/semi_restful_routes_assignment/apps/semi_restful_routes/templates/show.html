@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Show</title>
+    <style media="screen">
+      span{
+        display: inline-block;
+        width: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    {% if product %}
+    <h3>Product {{product.id}}</h3>
+    <p><span>Name:</span>{{product.name}}</p>
+    <p><span>Description:</span>{{product.description}}</p>
+    <p><span>Price:</span>${{product.price}}</p>
+    <p><a href="{% url 'edit' product_id=product.id %}">Edit</a> | <a href="/">Back</a></p>
+    {% else %}
+      <h3 style="color: red">Product with this ID does not exist</h3>
+    {% endif %}
+  </body>
+</html>
