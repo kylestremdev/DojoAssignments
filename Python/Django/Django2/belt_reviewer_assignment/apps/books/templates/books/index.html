@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Books Home</title>
+  </head>
+  <body>
+    <div id="header">
+      <h3>Welcome, {{request.session.user.alias}}!</h3>
+      <a href="{% url 'books:add' %}">Add Book and Review</a>
+      <a href="{% url 'users:logout' %}">Logout</a>
+    </div>
+
+    <div id="recent_reviews">
+      <h4>Recent Book Reviews:</h4>
+      <div id="reviews">
+        {% for review in reviews %}
+          <div class="review">
+            <h4><a href="{% url 'books:show_book' book_id=review.book.id %}">{{review.book.title}}</a></h4>
+            <p>Rating: {{review.rating}}</p>
+            <p>
+              <a href="{% url 'users:show' user_id=review.user.id %}">{{review.user.alias}}</a> says:
+              {{review.review}}
+            </p>
+
+            <i>Posted on {{review.created_at}}</i>
+            {% if request.session.user.id == review.user.id %}
+            <a href="{% url 'books:delete' review_id=review.id book_id=review.book.id %}">Delete this Review</a>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div id="other_books">
+      <h4>Other Books with Reviews:</h4>
+      <div id="books">
+        {% for book in books %}
+          <p><a href="{url 'books:show' book_id=book.id %}">{{book.title}}</a></p>
+        {% endfor %}
+      </div>
+    </div>
+  </body>
+</html>

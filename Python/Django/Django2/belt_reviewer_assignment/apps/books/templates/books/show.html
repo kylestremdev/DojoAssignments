@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{book.title}}</title>
+  </head>
+  <body>
+    <h4>{{book.title}}</h4>
+    <p>Author: {{book.author.name}}</p>
+
+    <div id="reviews">
+      <h4>Reviews:</h4>
+      <hr />
+      {% for review in book.book_reviews.all %}
+        <p>Rating {{review.rating}}</p>
+        <p>
+          <a href="{% url 'users:show' user_id=review.user.id %}">{{review.user.alias}}</a> says:
+          {{review.review}}
+        </p>
+
+        <i>Posted on {{review.created_at}}</i>
+        {% if request.session.user.id == review.user.id %}
+        <a href="{% url 'books:delete' review_id=review.id book_id=book.id %}">Delete this Review</a>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div id="add_review">
+      <p><strong>Add a Review:</strong></p>
+      <form class="" action="{% url 'books:new_review' %}" method="post">
+        {% csrf_token %}
+        <textarea name="review" rows="4" cols="40"></textarea>
+        <br />
+        <label for="rating">Rating:</label>
+        <input type="number" name="rating" value="5" min="1" max="5">
+        <br />
+        <input type="hidden" name="book_id" value="{{book.id}}">
+        <input type="hidden" name="user_id" value="{{request.session.user.id}}">
+        <input type="submit" name="" value="Submit Review">
+      </form>
+    </div>
+  </body>
+</html>
