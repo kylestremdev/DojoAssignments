@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <% for (var idx in quotes) { %>
+      <p>"<%= quotes[idx].quote %>"</p>
+      <p>-<%= quotes[idx].name %> at <%= quotes[idx].createdAt %></p>
+    <% } %>
+
+    <p><a href="/">Back</a></p>
+  </body>
+</html>

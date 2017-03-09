@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Express and Sockets - Epic Button Game</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type ="text/javascript">
+        $(document).ready(function (){
+            // this triggers the connection event in our server!
+            var socket = io.connect();
+            // we'll write all the socket stuff after the above line!
+            socket.on('updated_count', function(count) {
+              $('span').text(count);
+            });
+
+            $('#epic_button').click(function () {
+              socket.emit('add_count');
+            });
+            $('#reset').click(function () {
+              socket.emit('reset_count');
+            });
+        })
+    </script>
+  </head>
+  <body>
+    <h2>The button has been pushed <span></span> time(s)</h2>
+    <button id="epic_button">Push The Epic Button</button>
+    <button id="reset">Reset Count</button>
+  </body>
+</html>

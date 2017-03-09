@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Survey Form Results</title>
+    <style>
+      label{
+        display: inline-block;
+        width: 150px;
+      }
+    </style>
+  </head>
+  <body>
+    <h3 style="text-decoration:underline">Submitted Information:</h3>
+    <p><label>Name:</label><span><%= postData.name %></span></p>
+    <p><label>Dojo Location:</label><span><%= postData.location %></span></p>
+    <p><label>Favorite Language:</label><span><%= postData.language %></span></p>
+    <p><label>Comment:</label><span><%= postData.comment %></span></p>
+    <p><a href="/"><button type="button" name="button">Go Back</button></a></p>
+  </body>
+</html>
