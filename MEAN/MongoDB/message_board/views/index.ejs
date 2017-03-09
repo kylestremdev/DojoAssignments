@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>MongoDB - Message Board Assignment</title>
+    <style media="screen">
+      ul{
+        list-style: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>The Dojo Message Board</h3>
+    <hr />
+    <div id="message_board">
+      <form class="" action="/message" method="post">
+        <p><label for="name">Name:</label><br /><input type="text" name="name" value=""></p>
+        <p><label for="comment">Message:</label><br /><textarea name="message" rows="4" cols="80"></textarea></p>
+        <input type="submit" name="" value="Post Message">
+      </form>
+      <% if (messages) { %>
+        <% for (var idx in messages) { %>
+          <div class="message">
+            <p><label for="name">Name:</label><span><%= messages[idx].name %></span></p>
+            <p><label for="message">Message:</label><span><%= messages[idx].message %></span></p>
+            <ul>
+              <% if (messages[idx].comments.length > 0) { %>
+                <% for (var jdx = 0; jdx < messages[idx].comments.length; jdx++) { %>
+                  <li>Name: <%= messages[idx].comments[jdx].name %></li>
+                  <li>Comment: <%= messages[idx].comments[jdx].text %></li>
+                  <hr />
+                <% } %>
+              <% } %>
+              <li><form class="" action="/messages/<%= messages[idx]._id %>/comment" method="post">
+                <p><label for="name">Name:</label><br /><input type="text" name="name" value=""></p>
+                <p><label for="comment">Comment:</label><br /><textarea name="comment" rows="3" cols="80"></textarea></p>
+                <input type="submit" name="" value="Post Comment">
+              </form></li>
+            </ul>
+          </div>
+          <hr />
+        <% } %>
+      <% } %>
+    </div>
+  </body>
+</html>
