@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html ng-app='myApp'>
+  <head>
+    <meta charset="utf-8">
+    <title>Angular - Products with a Factory</title>
+    <script src="bower_components/angular/angular.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      var app = angular.module('myApp', []);
+
+      app.factory('productFactory', function () {
+        var products = [];
+
+        var factory = {};
+
+        factory.index = function () {
+          return products;
+        };
+
+        factory.addProduct = function (product) {
+          products.push(product);
+        };
+
+        factory.deleteProduct = function (product) {
+          products.splice(products.indexOf(product), 1);
+        };
+
+        return factory;
+      });
+
+      app.controller('productsController', ['$scope', 'productFactory', function ($scope, productFactory) {
+        $scope.products = productFactory.index();
+
+
+        $scope.addProduct = function () {
+          $scope.newProduct.price = parseFloat($scope.newProduct.price);
+          productFactory.addProduct($scope.newProduct);
+          $scope.newProduct = {};
+          console.log($scope.products);
+        };
+
+        $scope.deleteProduct = function (product) {
+          productFactory.deleteProduct(product);
+        };
+      }])
+    </script>
+  </head>
+  <body>
+    <div ng-controller='productsController'>
+      <form>
+        <p><label for="">Product Name</label><input type="text" ng-model='newProduct.name'></p>
+        <p><label for="">Product Price</label><input type="number" ng-model='newProduct.price' step='.01'></p>
+        <button ng-click='addProduct();'>Add Product</button>
+      </form>
+
+      <table ng-if='products.length'>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat='product in products | orderBy:"price"'>
+            <td>{{product.name}}</td>
+            <td>{{product.price | currency}}</td>
+            <td><button type="button" ng-click='deleteProduct(product);'>Delete Product</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

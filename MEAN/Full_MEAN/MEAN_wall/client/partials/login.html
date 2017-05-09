@@ -1,0 +1,13 @@
+<h3>Login</h3>
+
+<ul ng-if="errors">
+  <li style="color: red" ng-repeat="error in errors">{{error}}</li>
+</ul>
+
+<form>
+  <p><label for="email">Email:</label><input type="text" ng-model="userLogin.email"></p>
+  <p><label for="email">Password:</label><input type="password" ng-model="userLogin.password"></p>
+  <button ng-click="loginUser();">Login</button>
+</form>
+
+<p><a href="#!/register">Sign Up</a></p>

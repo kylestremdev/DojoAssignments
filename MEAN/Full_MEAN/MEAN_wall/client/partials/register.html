@@ -1,0 +1,18 @@
+<h3>Register</h3>
+
+<ul ng-if="errors">
+  <li style="color: red" ng-if="errors.length" ng-repeat="error in errors">{{error}}</li>
+</ul>
+
+
+<form>
+  <p><label for="first_name">First Name:</label><input type="text" ng-model="userRegister.first_name"></p>
+  <p><label for="last_name">Last Name:</label><input type="text" ng-model="userRegister.last_name"></p>
+  <p><label for="email">Email:</label><input type="text" ng-model="userRegister.email"></p>
+  <p><label for="email">Password:</label><input type="password" ng-model="userRegister.password"></p>
+  <p><label for="email">Confirm Password:</label><input type="password" ng-model="userRegister.password_confirmation"></p>
+  <p><label for="email">Birthday:</label><input type="date" ng-model="userRegister.birthday"></p>
+  <button ng-click="registerUser();">Register</button>
+</form>
+
+<p><a href="#!/">Sign In</a></p>

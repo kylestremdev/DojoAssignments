@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html ng-app="friendsApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Full MEAN - Mean Friends</title>
+    <script src="angular/angular.js" charset="utf-8"></script>
+    <script src="angular-route/angular-route.js" charset="utf-8"></script>
+    <script src="assets/app.js" charset="utf-8"></script>
+    <script src="assets/factories/friendFactory.js" charset="utf-8"></script>
+    <script src="assets/controllers/indexController.js" charset="utf-8"></script>
+    <script src="assets/controllers/newController.js" charset="utf-8"></script>
+    <script src="assets/controllers/editController.js" charset="utf-8"></script>
+
+  </head>
+  <body>
+    <a href="#!/new">New</a> | <a href="#!/">Back</a>
+    <div ng-view="">
+    </div>
+  </body>
+</html>

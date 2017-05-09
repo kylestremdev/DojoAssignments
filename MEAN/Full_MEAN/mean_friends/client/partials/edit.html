@@ -1,0 +1,15 @@
+<form>
+  <p>
+    <input type="text" name="first_name" ng-model="friend.first_name">
+    <label for="first_name">First Name</label>
+  </p>
+  <p>
+    <input type="text" name="last_name" ng-model="friend.last_name">
+    <label for="last_name">Last Name</label>
+  </p>
+  <p>
+    <input type="date" name="birthday" ng-model="friend.birthday">
+    <label for="birthday">Birthday</label>
+  </p>
+  <button type='button' ng-click="updateFriend();">Edit Friend</button>
+</form>

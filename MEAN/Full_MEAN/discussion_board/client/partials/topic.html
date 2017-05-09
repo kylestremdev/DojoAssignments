@@ -1,0 +1,37 @@
+<div id="header">
+  <a href ng-click="logoutUser();">Logout</a>
+  |
+  <a href="#!/dashboard">Dashboard</a>
+</div>
+
+<div id="topic">
+  <h3><a href="#!/user/{{topic._user._id}}">{{topic._user.name}}</a> posted a topic:</h3>
+  <div class="tabbed">
+    <p><strong>{{topic.content}}</strong></p>
+    <p>Description: {{topic.description}}</p>
+  </div>
+
+  <form>
+    <p><strong>Post your answer here...</strong></p>
+    <p><textarea ng-model="post.content"></textarea></p>
+    <button ng-click="createPost(post)">Post</button>
+  </form>
+</div>
+
+<hr>
+
+<div id="posts" ng-if="topic.posts.length">
+  <div class="post tabbed" ng-repeat="post in topic.posts">
+    <p><a href="#!/user/{{post._user._id}}">{{post._user.name}}</a>: {{post.content}}</p>
+    <div class="comments tabbed">
+      <div class="comment" ng-if="post.comments.length" ng-repeat="comment in post.comments">
+        <p><a href="#!/user/{{comment._user._id}}">{{comment._user.name}}</a>: {{comment.content}}</p>
+      </div>
+      <form>
+        <p><textarea ng-model="newComment.content" placeholder="Comment..."></textarea></p>
+        <button ng-click="createComment(newComment, post._id);">Comment</button>
+      </form>
+    </div>
+    <hr>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<div id="header">
+  <a href ng-click="logoutUser();">Logout</a>
+</div>
+
+<h3>Welcome <a href="#!/user/{{user._id}}">{{user.name}}</a></h3>
+
+<div id="topics-table">
+  <p><input type="text" ng-model="topicFilter"></p>
+  <table ng-if="topics.length">
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Topic</th>
+        <th>User Name</th>
+        <th>Posts</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="topic in topics | orderBy:'_category.name' | filter:topicFilter">
+        <td>{{topic._category.name}}</td>
+        <td><a href="#!/topic/{{topic._id}}">{{topic.content}}</a></td>
+        <td><a href="#!/user/{{topic._user._id}}">{{topic._user.name}}</a></td>
+        <td>{{topic.posts.length}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<h4>Add a new Topic</h4>
+<form>
+  <p>
+    <label for="topic">Topic:</label>
+    <input type="text" ng-model="newTopic.content">
+  </p>
+  <p>
+    <label for="description">Description:</label>
+    <textarea ng-model="newTopic.description"></textarea>
+  </p>
+  <p>
+    <label for="category">Category:</label>
+    <select ng-model="newTopic.category" ng-init="newTopic.category='Web Fundamentals'">
+      <option ng-repeat="category in categories" value="{{category.name}}">{{category.name}}</option>
+    </select>
+  </p>
+  <button ng-click="createTopic(newTopic);">Submit</button>
+</form>

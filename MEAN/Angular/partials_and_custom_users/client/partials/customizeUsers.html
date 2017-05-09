@@ -1,0 +1,25 @@
+<form>
+  <p><label for="">First Name</label><input type="text" ng-model='newUser.first_name'></p>
+  <p><label for="">Last Name</label><input type="text" ng-model='newUser.last_name'></p>
+  <p><label for="">Favorite Language</label><input type="text" ng-model='newUser.favorite_language'></p>
+  <button type='button' ng-click='createUser();'>Create User</button>
+</form>
+
+<table ng-if='users.length'>
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Fav Language</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat='user in users'>
+      <td>{{user.first_name}}</td>
+      <td>{{user.last_name}}</td>
+      <td>{{user.favorite_language}}</td>
+      <td><button type='button' ng-click='deleteUser($index);'>Delete User</button></td>
+    </tr>
+  </tbody>
+</table>

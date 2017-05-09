@@ -1,0 +1,49 @@
+<div id="wrapper">
+  <div id="main">
+    <div id="order-form">
+      <h4>Add a new order</h4>
+      <ul ng-if="errors">
+        <li style="color: red" ng-repeat="error in errors">{{error}}</li>
+      </ul>
+      <form>
+        <p>
+          <label for="customer">Customer:</label>
+          <select ng-model="newOrder.customer_id">
+            <option ng-repeat="customer in customers" value="{{customer._id}}" selected>{{customer.name}}</option>
+          </select>
+        </p>
+        <p>
+          <label for="order">Order:</label>
+          <input type="number" ng-model="newOrder.quantity" min="" step="1">
+          <select ng-model="newOrder.product_id">
+            <option ng-repeat="product in products" value="{{product._id}}" selected>{{product.name}}</option>
+          </select>
+        </p>
+        <button ng-click="createOrder();">Order</button>
+      </form>
+    </div>
+    <div id="orders">
+      <form>
+        <input type="text" ng-model="orderFilter" placeholder="filter...">
+      </form>
+      <table>
+        <thead>
+          <tr>
+            <th>Customer Name</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="order in orders">
+            <td>{{order._customer.name}}</td>
+            <td>{{order._product.name}}</td>
+            <td>{{order.quantity}}</td>
+            <td>{{order.createdAt.toDateString()}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

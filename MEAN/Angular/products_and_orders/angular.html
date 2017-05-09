@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html ng-app='myApp'>
+  <head>
+    <meta charset="utf-8">
+    <title>Angular - Products and Orders</title>
+    <script src="bower_components/angular/angular.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      var app = angular.module('myApp', []);
+
+      app.factory('productFactory', function () {
+        var products = [];
+
+        var factory = {};
+
+        factory.index = function (callback) {
+          callback(products);
+        };
+
+        factory.addProduct = function (product, callback) {
+          product.quantity = 50;
+          products.push(product);
+          callback(products);
+        };
+
+        factory.deleteProduct = function (index, callback) {
+          products.splice(index, 1);
+          callback(products);
+        };
+
+        factory.orderProduct = function (index, callback) {
+          if (products[index].quantity) {
+            products[index].quantity--;
+          }
+          callback(products);
+        };
+
+        return factory;
+      });
+
+      app.controller('productsController', ['$scope', 'productFactory', function ($scope, productFactory) {
+        $scope.products = [];
+        productFactory.index(function (data) {
+          $scope.products = data;
+        });
+
+        $scope.addProduct = function () {
+          productFactory.addProduct($scope.newProduct, function (data) {
+            $scope.products = data;
+            $scope.newProduct = {};
+            console.log($scope.products);
+          })
+        };
+
+        $scope.deleteProduct = function (index) {
+          productFactory.deleteProduct(index, function (data) {
+            $scope.products = data;
+          });
+        };
+      }]);
+
+      app.controller('ordersController', ['$scope', 'productFactory', function($scope, productFactory) {
+        $scope.products = [];
+        productFactory.index(function (data) {
+          $scope.products = data;
+        })
+
+        $scope.order = function (index) {
+          productFactory.orderProduct(index, function (data) {
+            $scope.products = data;
+          });
+        }
+      }]);
+    </script>
+    <style media="screen">
+      .controller{
+        border: 1px solid black;
+        height: 200px;
+        overflow-y: scroll;
+      }
+      .controller table{
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div ng-controller='productsController as productsC' class='controller'>
+      <form>
+        <p><label for="">Product Name</label><input type="text" ng-model='newProduct.name'></p>
+        <p><label for="">Product Price</label><input type="number" ng-model='newProduct.price' step='0.01'></p>
+        <button type='button' ng-click='addProduct();'>Add Product</button>
+      </form>
+
+      <table ng-if='products.length'>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="product in products | orderBy:'price'">
+            <td>{{product.name}}</td>
+            <td>{{product.price | currency}}</td>
+            <td><button type="button" ng-click="deleteProduct($index)">Delete Product</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div ng-controller='ordersController as ordersC' class='controller'>
+      <table ng-if="products.length">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Qty Available</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat='product in products | orderBy:"-quantity"'>
+            <td>{{product.name}}</td>
+            <td>{{product.price | currency}}</td>
+            <td>{{product.quantity}}</td>
+            <td><button type="button" ng-click="order($index)">Buy</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

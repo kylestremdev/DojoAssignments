@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app="storeApp">
+  <head>
+    <meta charset="utf-8">
+    <title>MEAN - Mini-MEAN Store</title>
+    <script src="angular/angular.js" charset="utf-8"></script>
+    <script src="angular-route/angular-route.js" charset="utf-8"></script>
+    <script src="angular-cookies/angular-cookies.js" charset="utf-8"></script>
+    <script src="assets/app.js" charset="utf-8"></script>
+    <script src="assets/factories/productFactory.js" charset="utf-8"></script>
+    <script src="assets/factories/customerFactory.js" charset="utf-8"></script>
+    <script src="assets/factories/orderFactory.js" charset="utf-8"></script>
+    <script src="assets/controllers/productsController.js" charset="utf-8"></script>
+    <script src="assets/controllers/customersController.js" charset="utf-8"></script>
+    <script src="assets/controllers/ordersController.js" charset="utf-8"></script>
+    <style media="screen">
+      #sidebar, #main{
+        display: inline-block;
+        vertical-align: top;
+      }
+      #main{
+        width: 75%;
+      }
+      .product{
+        display: inline-block;
+        width: 15%;
+        text-align: center;
+      }
+      .product .product-image{
+        width: 80%;
+        height: 80%;
+      }
+      .product p{
+        margin: 0;
+      }
+      #main table{
+        text-align: center;
+        border-collapse: collapse;
+        margin: 10px 0;
+      }
+      #main table th, #main table td{
+        padding-left: 5px;
+        padding-right: 5px;
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <p><a href="#!/" class="active">Dashboard</a> | <a href="#!/products">Products</a> | <a href="#!/orders">Orders</a> | <a href="#!/customers">Customers</a></p>
+    <div ng-view="">
+    </div>
+  </body>
+</html>

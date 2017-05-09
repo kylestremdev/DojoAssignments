@@ -1,0 +1,27 @@
+<a href ng-click="logoutUser();">Logout</a>
+
+<div id="wall">
+  <form>
+    <p><label for="message">Post a message:</label><br /><textarea cols="80" ng-model='newMessage.message'></textarea></p>
+    <button type="button" ng-click="createMessage();">Post a message</button>
+  </form>
+
+  <ul id="messages">
+    <li class="message" ng-repeat="message in messages">
+      <h4>{{message._user.name.first}} - {{message.createdAt}}</h4>
+      <p>{{message.message}}</p>
+      <ul class="comment" ng-if="message.comments.length">
+        <li ng-repeat="comment in message.comments">
+          <h5>{{comment._user.name.first}} - {{comment.createdAt}}</h5>
+          <p>{{comment.comment}}</p>
+        </li>
+      </ul>
+      <ul>
+        <li><form>
+          <p><label for="comment">Post a comment:</label><br /><textarea cols="80" ng-model='newComment.comment'></textarea></p>
+          <button type="button" ng-click="createComment(newComment, message._id);">Post a comment</button>
+        </form></li>
+      </ul>
+    </li>
+  </ul>
+</div>

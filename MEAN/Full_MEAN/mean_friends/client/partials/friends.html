@@ -1,0 +1,19 @@
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Show</th>
+      <th>Update</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="friend in friends | filter:name_filter">
+      <td>{{friend.first_name}} {{friend.last_name}}</td>
+      <td><a href="#!/show/{{friend._id}}">Show</a></td>
+      <td><a href="#!/edit/{{friend._id}}">Edit</a></td>
+      <td><a href ng-click="deleteFriend(friend._id);">Delete</a></td>
+    </tr>
+  </tbody>
+</table>
+<input type="text" ng-model="name_filter.first_name" placeholder="filter...">
